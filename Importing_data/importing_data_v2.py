@@ -9,7 +9,7 @@ def importing(name_file):
         
 
         new = txt.read()
-        csv.write("S ID,Site,Postcode,T ID, date, time , reading")
+        csv.write("S ID,Site,Postcode,T ID, date, time , reading,\n")
         csv.write(new)
 
         txt.close()
@@ -18,3 +18,5 @@ def importing(name_file):
     except:
         print(f"file not found {name_file}")
         quit()
+
+importing("Wind.txt")
