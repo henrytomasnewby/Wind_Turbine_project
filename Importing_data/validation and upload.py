@@ -14,14 +14,30 @@ def check_range(num,Range):
     
     
 def valid_date(date):
+    month_day = {
+        1:31,
+        2:28,
+        3:31,
+        4:30,
+        5:31,
+        6:30,
+        7:31,
+        8:31,
+        9:30,
+        10:31,
+        11:30,
+        12:31
+        }
     
-    
-    month = date[4:5]
-    day = date[6:7]
-    if month is not in range(1,12):
+    month = int(date[4:5])
+    day = int(date[6:7])
+    if month not in range(1,12):
         return "invalid"
     else:
-        if day 
+        if day in range(0,month_day[month]):
+            return "valid"
+        else:
+            return "invalid"
     
 
 def check_format(data,Format):
@@ -53,7 +69,8 @@ for row in reader:
         quit(f"invalid data at {loop_count}{row}{row[2]}")
     if check_format(row[3],"LLDDD") == "invalid":
         quit(f"invalid data at {loop_count}{row}{row[3]}")
-    if 
+    if valid_date(str(row[4])) == "invalid":
+        quit(f"invalid data at {loop_count}{row}{row[4]}")
         
         
         
