@@ -2,7 +2,18 @@ import csv
 import importing_data_v2 as Import
 
 csv_file = open("Wind.csv","r")
+Wind = open("Wind_validated.csv","w")
 
+def error_handler(row:list,pos_error:list):
+    print(f"invalid data at {pos_error[0]} current loop the data is {row} with error occuring at {row[pos_error[1]]}")
+    HandorThrow = str(input("input HAN for ending program to edit file or THR for excluding the row"))
+    HandorThrow =HandorThrow.upper()
+    if HandorThrow == "HAN":
+        quit("exit reason = validation error handling ")
+        
+    else:
+        print("throwing error")
+        return 
 def check_range(num,Range):
         
         if str == type(num):
@@ -70,39 +81,34 @@ def check_format(data,Format):
             else:
                 return "valid"
 
-reader = csv.reader(csv_file)
+def validate():
+    reader = csv.reader(csv_file)
 
-loop_count = 0
-for row in reader:
-    if loop_count == 0:
-        
+    loop_count = 0
+    for row in reader:
+        if loop_count == 0:
+            
+            print("validating")
+            loop_count += 1
+            continue
         loop_count += 1
-        continue
-    loop_count += 1
-    print(row)
+        if check_range(int(row[0]),[1,99999]) == "invalid":
+            row = error_handler(row,[loop_count,0])
+        if check_range(row[1],(2,25))== "invalid":
+            row = error_handler(row,[loop_count,1])
+        if check_format(row[2],"LLDDLDDLL") == "invalid":
+            row = error_handler(row,[loop_count,2])
+        if check_format(row[3],"LLDDD") == "invalid":
+            row = error_handler(row,[loop_count,3])
+        if valid_date(str(row[4])) == "invalid":
+            row = error_handler(row,[loop_count,4])
+        if valid_time(str(row[5])) == "invalid":
+            row = error_handler(row,[loop_count,5])
+        if check_range(float(row[6]),[-0.1,5.1]) == "invalid":
+            row = error_handler(row,[loop_count,6])
+        Wind.write(str(row)+"\n")
     print("")
-    if check_range(int(row[0]),[1,99999]) == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[0]}")
-    if check_range(row[1],(2,25))== "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[1]}")
-    if check_format(row[2],"LLDDLDDLL") == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[2]}")
-    if check_format(row[3],"LLDDD") == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[3]}")
-    if valid_date(str(row[4])) == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[4]}")
-    if valid_time(str(row[5])) == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[5]}")
-    if check_range(float(row[6]),[-0.1,5.1]) == "invalid":
-        quit(f"invalid data at {loop_count}current loop the data is {row} with error occuring at {row[6]}")
-        
-        
-csv_file.close()
+    print("validation succsessful")
     
-    
-    
-    
-    
-    
-        
-        
+    Wind.close()
+    csv_file.close()
