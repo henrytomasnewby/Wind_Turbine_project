@@ -1,7 +1,7 @@
 import csv
-import importing_data_v2 as Import
+from ImportingData import ImportingDataV2 as Import
 
-csv_file = open("Wind.csv","r")
+csv_file = open("ImportingData/Wind.csv","r")
 Wind = open("Wind_validated.csv","w")
 
 def error_handler(row:list,pos_error:list):
@@ -71,15 +71,17 @@ def valid_time(time):
     
 
 def check_format(data,Format):
-    
- 
     for i in range(0,len(data)):
+            
             if Format[i] =="L" and False == data[i].isalpha():
                 return "invalid"
             elif Format[i] =="D" and False == data[i].isdigit():
                 return "invalid"
+            elif Format[i] == "X" and data[i] != " ":
+                return "invalid"
             else:
-                return "valid"
+                continue
+    return "valid"
 
 def validate():
     reader = csv.reader(csv_file)
@@ -96,7 +98,7 @@ def validate():
             row = error_handler(row,[loop_count,0])
         if check_range(row[1],(2,25))== "invalid":
             row = error_handler(row,[loop_count,1])
-        if check_format(row[2],"LLDDLDDLL") == "invalid":
+        if check_format(row[2],"LLDDLXDDLL") == "invalid":
             row = error_handler(row,[loop_count,2])
         if check_format(row[3],"LLDDD") == "invalid":
             row = error_handler(row,[loop_count,3])

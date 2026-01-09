@@ -5,7 +5,7 @@ def importing(name_file):
     try:
         import csv
         txt = open(name_file,"r")
-        csv = open("Wind.csv","w")
+        csv = open("ImportingData/Wind.csv","w")
         
 
         new = txt.read()
@@ -19,4 +19,4 @@ def importing(name_file):
         print(f"file not found {name_file}")
         quit()
 
-importing("Wind.txt")
+importing("ImportingData/Wind.txt")
