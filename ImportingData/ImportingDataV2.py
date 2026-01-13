@@ -19,4 +19,19 @@ def importing(name_file):
         print(f"file not found {name_file}")
         quit()
 
-importing("ImportingData/Wind.txt")
+def add_turbine_reading(turbine_line):
+    pass
+
+def create_2d_list(List):
+    
+    MD_list = []
+    sites = []
+    for turbines in List:
+        current = int(turbines[0])
+        if current not in sites:
+            sites.append(turbines[0])
+            MD_list.append([current,turbines[1],turbines[2],[turbines[3],add_turbine_reading(turbines)]])
+        else:
+            
+            if turbines[3] in MD_list[int(current)]:
+                pass
