@@ -1,5 +1,4 @@
 import csv
-from ImportingData import ImportingDataV2 as Import
 
 csv_file = open("ImportingData/Wind.csv","r")
 Wind = open("Wind_validated.csv","w")
@@ -108,7 +107,9 @@ def validate():
             row = error_handler(row,[loop_count,5])
         if check_range(float(row[6]),[-0.1,5.1]) == "invalid":
             row = error_handler(row,[loop_count,6])
-        Wind.write(str(row)+"\n")
+        # this code is tempery
+        Wind.write(str(row)[2:len(str(row))-3].replace("'","")+"\n")
+        
     print("")
     print("validation succsessful")
     

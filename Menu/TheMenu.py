@@ -14,13 +14,13 @@ def menu():
     """)
     
     choice = int(input("Input:"))
-    
+    #two validate the above choice
     match choice:
         case 1:
-            
+            return choice
             
         case 2:
-            
+            pass
             
         case 3:
-    
+            pass
