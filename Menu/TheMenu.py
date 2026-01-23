@@ -2,8 +2,6 @@
 # menu
 
 
-
-
 def menu():
     print("""
     1) Search sites-unsort
@@ -20,7 +18,7 @@ def menu():
             return choice
             
         case 2:
-            pass
+            return choice
             
         case 3:
-            pass
+            return choice

@@ -20,13 +20,14 @@ def importing(name_file):
         quit()
 
 def search(current_layer:list,ID:str):
-    start = 0
+    start = 1
     # checks data
-    alpha = type(current_layer)
+    alpha = list
+    if len(current_layer)>2:
+        alpha = type(current_layer[0])
     if  alpha == str:
-        alpha = type(current_layer)
         while alpha == str:
-            alpha = type(current_layer)
+            alpha = type(current_layer[start])
             if alpha == str:
                 start += 1
             else:
@@ -35,12 +36,12 @@ def search(current_layer:list,ID:str):
     length = len(current_layer)
     for pos in range(start,length):
         possible=str(current_layer[pos][0])
-        if possible is ID:
+        if possible in ID:
             return possible,pos
         else:
             continue
     return "null",0
-
+## data data
 def add_turbine_reading(turbine_line):
     Reading = [turbine_line[4],turbine_line[5],turbine_line[6]]
     return Reading
@@ -57,12 +58,12 @@ def add_site(row):
 
 def create_md_list(List):
     
-    MD_list = []
+    MD_list = [[]]
 
     for turbines in List:
-        current_site = str(turbines[0])
-        
-        if current_site not in search(MD_list,current_site)[0]:
+        current_site = turbines[0]
+        search_debug =search(MD_list,current_site)
+        if current_site not in (search_debug[0]):
             
             MD_list.append(add_site(turbines))
         else:
@@ -70,13 +71,14 @@ def create_md_list(List):
             # the MD is starting with [[ but should have [
             
         
-            if turbines[3] not in search(MD_list[search(MD_list,current_site)[1]],turbines[3])[0]:
+            if turbines[3] not in search(MD_list[search_debug[1]],turbines[3])[0]:
                 
-                MD_list.append(add_turbine(turbines))
-                print(MD_list)
+                MD_list[search_debug[1]].append(add_turbine(turbines))
+                
             else:
                 MD_list[search(MD_list,current_site)[1]][search(MD_list[search(MD_list,current_site)[1]],turbines[3])[1]].append(add_turbine_reading(turbines))
-                print(MD_list)
+    
+    del (MD_list[0])
     return MD_list
     
 
