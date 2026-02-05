@@ -68,8 +68,6 @@ def create_md_list(List):
             MD_list.append(add_site(turbines))
         else:
             
-            # the MD is starting with [[ but should have [
-            
         
             if turbines[3] not in search(MD_list[search_debug[1]],turbines[3])[0]:
                 
