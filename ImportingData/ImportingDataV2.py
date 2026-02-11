@@ -51,7 +51,7 @@ def add_turbine(turbine_line):
  turbine = [turbine_line[3],add_turbine_reading(turbine_line)]
  return turbine
 
-
+# this adds a site
 def add_site(row):
     List = [row[0],row[1],row[2],add_turbine(row)]
     return List

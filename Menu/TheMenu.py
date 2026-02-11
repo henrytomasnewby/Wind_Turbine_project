@@ -1,6 +1,6 @@
 
 # menu
-
+data = 0
 
 def menu():
     print("""
