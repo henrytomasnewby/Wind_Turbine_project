@@ -94,19 +94,26 @@ def validate():
             continue
         loop_count += 1
         if check_range(int(row[0]),[1,99999]) == "invalid":
-            row = error_handler(row,[loop_count,0])
+            error_handler(row,[loop_count,0])
+            continue
         if check_range(row[1],(2,25))== "invalid":
-            row = error_handler(row,[loop_count,1])
+            error_handler(row,[loop_count,1])
+            continue
         if check_format(row[2],"LLDDLXDDLL") == "invalid":
-            row = error_handler(row,[loop_count,2])
+            error_handler(row,[loop_count,2])
+            continue
         if check_format(row[3],"LLDDD") == "invalid":
-            row = error_handler(row,[loop_count,3])
+            error_handler(row,[loop_count,3])
+            continue
         if valid_date(str(row[4])) == "invalid":
-            row = error_handler(row,[loop_count,4])
+            error_handler(row,[loop_count,4])
+            continue
         if valid_time(str(row[5])) == "invalid":
-            row = error_handler(row,[loop_count,5])
+            error_handler(row,[loop_count,5])
+            continue
         if check_range(float(row[6]),[-0.1,5.1]) == "invalid":
-            row = error_handler(row,[loop_count,6])
+            error_handler(row,[loop_count,6])
+            continue
         # this code is tempery
         Wind.write(str(row)[2:len(str(row))-3].replace("'","")+"\n")
         

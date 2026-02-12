@@ -17,7 +17,13 @@ file = csv.reader(Wind)
 for row in file:
     if pos == 0:
         pos = 1
-    List.append([ row[0].strip(" "),row[1].strip(" "),row[2].strip(" "),row[3].strip(" "),row[4].strip(" "),row[5].strip(" "),float(row[6]) ])
+    
+    try:
+        value = float(row[6])
+    except:
+        
+        value = float(0)
+    List.append([ row[0].strip(" "),row[1].strip(" "),row[2].strip(" "),row[3].strip(" "),row[4].strip(" "),row[5].strip(" "),value ])
 from Menu import TheMenu
 data = TheMenu.menu()
 
@@ -39,3 +45,5 @@ elif data == 3:
     
     
     Turbine_unsort(Turbine_data)
+
+
